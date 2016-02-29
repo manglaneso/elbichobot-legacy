@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'telegram/bot'
 
-token = '183010403:AAHc9yYo19nNWwnDVFtluDN3u6hztekidF0'
+token = ''
 
 # Hash to store command => method
 hash = {}
