@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'telegram/bot'
 
-token = ''
+token = '183010403:AAHc9yYo19nNWwnDVFtluDN3u6hztekidF0'
 
 # Hash to store command => method
 hash = {}
@@ -34,21 +34,23 @@ end
 # Main loop
 Telegram::Bot::Client.run(token) do |bot|
   bot.listen do |message|
-    begin
-      # If command has one argument
-      if message.text.include? " "
-        t = message.text.gsub(/\s+/m, ' ').strip.split(" ")
-        if hash.has_key?(t[0] + "\n")
-          send(hash[t[0] + "\n"].chomp, bot, message)
+    Thread.new {
+      begin
+        # If command has one argument
+        if message.text.include? " "
+          t = message.text.gsub(/\s+/m, ' ').strip.split(" ")
+          if hash.has_key?(t[0] + "\n")
+            send(hash[t[0] + "\n"].chomp, bot, message)
+          end
+        else
+          # If command has no arguments
+          if hash.has_key?(message.text + "\n")
+            send(hash[message.text + "\n"].chomp, bot, message)
+          end
         end
-      else
-        # If command has no arguments
-        if hash.has_key?(message.text + "\n")
-          send(hash[message.text + "\n"].chomp, bot, message)
-        end
+      rescue Telegram::Bot::Exceptions::ResponseError => e
+        puts e.message
       end
-    rescue Telegram::Bot::Exceptions::ResponseError => e
-      puts e.message
-    end
+    }
   end
 end
