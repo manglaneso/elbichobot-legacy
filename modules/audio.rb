@@ -16,3 +16,6 @@ def chandelier(bot, message)
   bot.api.send_audio(chat_id: message.chat.id, audio: File.new('../audio/chandelier.ogg'))
 end
 
+def penepene(bot, message)
+  bot.api.send_audio(chat_id: message.chat.id, audio: File.new('../audio/penepene.ogg'))
+end
