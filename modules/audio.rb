@@ -11,3 +11,8 @@ end
 def jaj(bot, message)
   bot.api.send_audio(chat_id: message.chat.id, audio: File.new('../audio/jaj.ogg'))
 end
+
+def chandelier(bot, message)
+  bot.api.send_audio(chat_id: message.chat.id, audio: File.new('../audio/chandelier.ogg'))
+end
+
