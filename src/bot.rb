@@ -36,6 +36,11 @@ Telegram::Bot::Client.run(token) do |bot|
   bot.listen do |message|
     Thread.new {
       begin
+        if message.text == 'me he perdido' or message.text == 'Me he perdido'
+          bot.api.send_sticker(chat_id: message.chat.id, sticker: 'BQADBAADpwMAAirpFAABvX17hai0B3oC', reply_to_message_id: message.message_id)
+        elsif message.text == 'que?' or message.text == 'Que?'
+          bot.api.send_message(chat_id: message.chat.id, text: 'Cacahue', reply_to_message_id: message.message_id)
+        end
         # If command has one argument
         if message.text.include? " "
           t = message.text.gsub(/\s+/m, ' ').strip.split(" ")
